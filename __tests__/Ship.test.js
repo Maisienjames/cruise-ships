@@ -13,6 +13,11 @@ describe('constructor', () => {
         const ship = new Ship('Merlin', 'Dover');
         expect(ship.startingPort).toBe('Dover');
     });
+    it('can set sail', () => {
+        const ship = new Ship('Merlin', 'Dover');
+        ship.setSail();
+        expect(ship.startingPort).toBeFalsy();
+    });
 });
 
     module.exports = Ship;
