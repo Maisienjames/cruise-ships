@@ -1,12 +1,10 @@
-function Ship(name, startingPort) {
-    this.name = name;
-    this.startingPort = startingPort;
+function Ship(currentPort) {
+    this.currentPort = currentPort;
     };
 
     Ship.prototype.setSail = function() {
-        this.startingPort = null;
+        this.currentPort = null;
     };
-
 
 
 module.exports = Ship;

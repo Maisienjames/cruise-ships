@@ -1,23 +1,23 @@
 /* globals describe it expect */
 const Ship = require('../src/ship.js');
+const Port = require('../src/port.js');
 
-describe('constructor', () => {
+describe('ship', () => {
     it('can be instantiated', () => {
+        const port = new Port('Dover');
         expect(new Ship()).toBeInstanceOf(Object);
     });
-    it('sets the name property', () => {
-        const ship = new Ship('Merlin', 'Dover');
-        expect(ship.name).toEqual('Merlin');
-    });
-    it('has a starting port', () => {
-        const ship = new Ship('Merlin', 'Dover');
-        expect(ship.startingPort).toBe('Dover');
+    it('names the current port', () => {
+        const port = new Port('Dover');
+        const ship = new Ship(port);
+        expect(ship.currentPort).toBe(port);
     });
     it('can set sail', () => {
-        const ship = new Ship('Merlin', 'Dover');
-        ship.setSail();
-        expect(ship.startingPort).toBeFalsy();
+        const port = new Port('Dover');
+        const ship = new Ship(port);
+    
     });
 });
 
     module.exports = Ship;
+    module.exports = Port;
