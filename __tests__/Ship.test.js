@@ -3,7 +3,6 @@ const Ship = require('../src/ship.js');
 const Port = require('../src/port.js');
 const Itinerary = require('../src/itinerary.js');
 const { it, expect } = require('@jest/globals');
-const { describe } = require('yargs');
 
 describe('Ship', () => {
 describe('with ports and an itinerary', () => {
@@ -18,13 +17,11 @@ describe('with ports and an itinerary', () => {
         const itinerary = new Itinerary([dover, calais]);
         const ship = new Ship(itinerary);
       });
-    });
 
     it('can be instantiated', () => {
         const port = new Port('Dover');
         const itinerary = new Itinerary([port]);
         const ship = new Ship(itinerary);
-
         expect(ship).toBeInstanceOf(Object);
     });
 
@@ -40,7 +37,6 @@ describe('with ports and an itinerary', () => {
         const calais = new Port('Calais');
         const itinerary = new Itinerary([dover, calais]);
         const ship = new Ship(itinerary);
-
         ship.setSail();
 
         expect(ship.currentPort).toBeFalsy();
@@ -48,11 +44,12 @@ describe('with ports and an itinerary', () => {
     });
     
     it('gets added to port on instantiation', () => {
-        const dover = new Port ('Dover');
-        const itinerary = new Itinerary ([dover]);
-        const ship = new Ship (itinerary);
+        const dover = new Port('Dover');
+        const itinerary = new Itinerary([dover]);
+        const ship = new Ship(itinerary);
         expect(dover.ships).toContain(ship);
     });
+});
 });
 
     it('can dock at a different port', () => {
