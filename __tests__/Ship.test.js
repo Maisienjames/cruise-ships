@@ -3,8 +3,23 @@ const Ship = require('../src/ship.js');
 const Port = require('../src/port.js');
 const Itinerary = require('../src/itinerary.js');
 const { it, expect } = require('@jest/globals');
+const { describe } = require('yargs');
 
-describe('ship', () => {
+describe('Ship', () => {
+describe('with ports and an itinerary', () => {
+    let ship;
+    let dover;
+    let calais;
+    let itinerary;
+  
+    beforeEach(() => {
+        const dover = new Port('Dover');
+        const calais = new Port('Calais');
+        const itinerary = new Itinerary([dover, calais]);
+        const ship = new Ship(itinerary);
+      });
+    });
+
     it('can be instantiated', () => {
         const port = new Port('Dover');
         const itinerary = new Itinerary([port]);
@@ -14,10 +29,10 @@ describe('ship', () => {
     });
 
     it('has a starting port', () => {
-        const port = new Port('Dover');
-        const itinerary = new Itinerary([port]);
+        const dover = new Port('Dover');
+        const itinerary = new Itinerary([dover]);
         const ship = new Ship(itinerary);
-        expect(ship.currentPort).toBe(port);
+        expect(ship.currentPort).toBe(dover);
     });
 
     it('can set sail', () => {
@@ -31,6 +46,14 @@ describe('ship', () => {
         expect(ship.currentPort).toBeFalsy();
         expect(dover.ships).not.toContain(ship);
     });
+    
+    it('gets added to port on instantiation', () => {
+        const dover = new Port ('Dover');
+        const itinerary = new Itinerary ([dover]);
+        const ship = new Ship (itinerary);
+        expect(dover.ships).toContain(ship);
+    });
+});
 
     it('can dock at a different port', () => {
         const dover = new Port('Dover');
@@ -56,14 +79,6 @@ describe('ship', () => {
 
         expect(() => ship.setSail()).toThrowError('End of itinerary reached');
     });
-
-    it('gets added to port on instantiation', () => {
-        const dover = new Port ('Dover');
-        const itinerary = new Itinerary ([dover]);
-        const ship = new Ship (itinerary);
-        expect(dover.ships).toContain(ship);
-    });
-});
 
     module.exports = Ship;
     module.exports = Port;
