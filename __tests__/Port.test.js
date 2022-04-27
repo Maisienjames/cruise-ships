@@ -7,20 +7,19 @@ describe('with ships', () => {
     let port;
     let dover;
     let calais;
-    let ship;
 
     beforeEach(() => {
-        const dover = new Port('Dover');
-        const calais = new Port('Calais');
+        dover = new Port('Dover');
+        calais = new Port('Calais');
         });
 
         it('can be instantiated', () => {
-            const port = new Port('Dover');
+            port = new Port('Dover');
             expect(new Port()).toBeInstanceOf(Object);
         });
     
         it('sets the name property', () => {
-            const port = new Port('Dover');
+            port = new Port('Dover');
             expect(port.name).toEqual('Dover');
         });
     });
