@@ -1,8 +1,5 @@
 /* globals describe it expect */
 const Ship = require('../src/ship.js');
-const Port = require('../src/port.js');
-const Itinerary = require('../src/itinerary.js');
-const { it, expect } = require('@jest/globals');
 
 describe('Ship', () => {
 describe('with ports and an itinerary', () => {
@@ -10,6 +7,11 @@ describe('with ports and an itinerary', () => {
     let calais;
   
     beforeEach(() => {
+        port = {
+            removeShip: jest.fn(),
+            addShip: jest.fn(),
+        };
+        
         dover = {
             addShip: jest.fn(),
             removeShip: jest.fn(),
@@ -50,22 +52,36 @@ describe('with ports and an itinerary', () => {
         expect(dover.addShip).toHaveBeenCalledWith(ship);
     });
 
-    it('can dock at a different port', () => {
-        ship.setSail();
-        ship.dock();
-
-        expect(ship.currentPort).toBe(calais);
-        expect(calais.addShip).toHaveBeenCalledWith[ship];
-    });
-
     it('can\'t sail further than its itinerary', () => {
         ship.setSail();
         ship.dock();
 
         expect(() => ship.setSail()).toThrowError('End of itinerary reached');
     });
+
+    it('can dock at a different port', () => {
+        const dover = {
+            name: 'Dover',
+            removeShip: jest.fn(),
+            addShip: jest.fn(),
+          };
+          const calais = {
+            name: 'Calais',
+            removeShip: jest.fn(),
+            addShip: jest.fn(),
+          };
+          const itinerary = {
+            ports: [dover, calais],
+          };
+          const ship = new Ship(itinerary);
+        
+        ship.setSail();
+        ship.dock();
+
+        expect(ship.currentPort).toBe(calais);
+        expect(calais.addShip).toHaveBeenCalledWith[ship];
+    });
 });
 });
     
     module.exports = Ship;
-    module.exports = Port;
