@@ -24,7 +24,10 @@ describe('with ports and an itinerary', () => {
             ships: []
         };
         
-        itinerary = new Itinerary([dover, calais]);
+        itinerary = {
+            ports: [dover, calais]
+        };
+     
         ship = new Ship(itinerary);
       });
 
@@ -46,33 +49,23 @@ describe('with ports and an itinerary', () => {
     it('gets added to port on instantiation', () => {
         expect(dover.addShip).toHaveBeenCalledWith(ship);
     });
-});
-});
 
     it('can dock at a different port', () => {
-        const dover = new Port('Dover');
-        const calais = new Port('Calais');
-        const itinerary = new Itinerary([dover, calais]);
-        const ship = new Ship(itinerary);
-
         ship.setSail();
         ship.dock();
 
         expect(ship.currentPort).toBe(calais);
-        expect(calais.ships).toContain(ship);
+        expect(calais.addShip).toHaveBeenCalledWith[ship];
     });
 
     it('can\'t sail further than its itinerary', () => {
-        const dover = new Port('Dover');
-        const calais = new Port('Calais');
-        const itinerary = new Itinerary([dover, calais]);
-        const ship = new Ship(itinerary);
-
         ship.setSail();
         ship.dock();
 
         expect(() => ship.setSail()).toThrowError('End of itinerary reached');
     });
-
+});
+});
+    
     module.exports = Ship;
     module.exports = Port;
